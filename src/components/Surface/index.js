@@ -9,6 +9,7 @@ import AddIcon from '@material-ui/icons/Add'
 import Grid from "@material-ui/core/Grid/Grid";
 import Contact from "./Contact";
 import InputWithIcon from "./Search";
+import FloatingActionButton from "./FloatButton";
 
 
 function Surface(props) {
@@ -25,15 +26,17 @@ function Surface(props) {
                             <Contact/><br/>
                             <Contact/><br/>
                             <Contact/><br/>
+                            <Contact/><br/>
+                            <Contact/><br/>
+                            <Contact/><br/>
                         </CardContent>
                         <Grid container justify={"flex-end"}>
-                            <Button variant="fab" color="primary" aria-label="Add" className={classes.button}>
-                                <AddIcon/>
-                            </Button>
+                            <FloatingActionButton/>
                         </Grid>
                     </Card>
                 </Grid>
             </Grid>
+
         </div>
     );
 }

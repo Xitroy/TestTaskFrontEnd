@@ -1,3 +1,9 @@
 .phoneList {
     margin-top: 24px;
 }
+
+.fab {
+    position: fixed;
+    bottom: 2px;
+    right: 2px;
+}
