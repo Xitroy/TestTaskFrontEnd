@@ -1,0 +1,14 @@
+.fb {
+    position: fixed !important;
+    bottom: 56px;
+    right: 56px;
+    z-index: 1000;
+    display: block;
+    transform: scale(2);
+}
+
+@media (max-width: 600px) {
+    .fb {
+        transform: scale(1);
+    }
+}

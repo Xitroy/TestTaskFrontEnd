@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import styles from './style.css';
+
 import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
-import styles from './style.css';
 import IconButton from "@material-ui/core/IconButton/IconButton";
 
 class Contact extends React.Component {
