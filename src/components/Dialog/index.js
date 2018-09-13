@@ -4,26 +4,14 @@ import styles from './style.css';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
-import blue from '@material-ui/core/colors/blue';
+import ContactForm from "../ContactForm";
 // import FloatButton from "../Dialog/FloatButton";
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
-const styles2 = {
-    avatar: {
-        backgroundColor: blue[100],
-        color: blue[600],
-    },
-};
 
 class SimpleDialog extends React.Component {
     handleClose = () => {
@@ -35,6 +23,11 @@ class SimpleDialog extends React.Component {
     };
 
     handleSubmit() {
+        //get inputs
+        //get storage which actually is an array of objects
+        //parse storage
+        //put one more
+        //sringify it
         var name = document.getElementById("nameinput").value;
         var phone = document.getElementById("phoneinput").value;
         var company = document.getElementById("companyinput").value;
@@ -43,12 +36,24 @@ class SimpleDialog extends React.Component {
             "phone": phone,
             "company": company
         };
-        var ran = Math.random(2);
-        localStorage.setItem(ran.toString(), JSON.stringify(person));
-        var put = JSON.parse(localStorage.getItem("data"));
+
+        let storage = JSON.parse(localStorage.getItem("Storage")); //should be an array
+        if (storage){
+            storage.push(person);
+            localStorage.setItem("Storage", JSON.stringify(storage));
+            this.props.onClose(JSON.stringify(localStorage));
+        }
+        else {
+            localStorage.setItem("Storage", JSON.stringify([person]));
+            this.props.onClose(JSON.stringify(localStorage));
+        }
+
+        // var ran = Math.random(2);
+        // localStorage.setItem(ran.toString(), JSON.stringify(person));
+        // var put = JSON.parse(localStorage.getItem("data"));
         //this.props.onClose(localStorage.getItem("data"));
-        console.log(localStorage.length);
-        this.props.onClose(put.name);
+        // console.log(localStorage.length);
+        // this.props.onClose(put.name);
 
 
     }
@@ -62,13 +67,27 @@ class SimpleDialog extends React.Component {
 
         return (
             <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
-                <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+                <DialogTitle id="simple-dialog-title">New contact</DialogTitle>
                 <div>
-                    <input type="text" name="name" id="nameinput"/>
-                    <input type="text" name="phone" id="phoneinput"/>
-                    <input type="text" name="company" id="companyinput"/>
-                    <button onClick={() => this.handleSubmit()}>submit</button>
-                    <button onClick={() => this.handleCancel()}>cancel</button>
+                    <ContactForm/>
+                </div>
+                <div className={"buttons"}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={"dialogBtn left"}
+                        onClick={() => this.handleSubmit()}
+                    >
+                        Save
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        className={"dialogBtn right"}
+                        onClick={() => this.handleCancel()}
+                    >
+                        Cancel
+                    </Button>
                 </div>
             </Dialog>
         );
@@ -81,7 +100,7 @@ SimpleDialog.propTypes = {
     selectedValue: PropTypes.string,
 };
 
-const SimpleDialogWrapped = withStyles(styles2)(SimpleDialog);
+const SimpleDialogWrapped = withStyles(styles)(SimpleDialog);
 
 class SimpleDialogDemo extends React.Component {
     state = {

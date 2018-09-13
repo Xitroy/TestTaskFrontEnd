@@ -1,0 +1,9 @@
+.contactForm{
+    display: flex;
+    width: 400px;
+    padding: 16px;
+}
+
+.contactTf{
+    margin: 16px;
+}

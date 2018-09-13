@@ -11,6 +11,8 @@ import Contact from "./Contact";
 import InputWithIcon from "./Search";
 // import FloatingActionButton from "../Dialog/FloatButton";
 
+localStorage.setItem("Storage", JSON.stringify([{"name":"hello"}]))
+let storage = JSON.parse(localStorage.getItem("Storage"));
 
 function Surface(props) {
     const {classes} = props;
@@ -22,13 +24,7 @@ function Surface(props) {
                     <Card className={classes.card}>
                         <InputWithIcon/>
                         <CardContent>
-                            <Contact/><br/>
-                            <Contact/><br/>
-                            <Contact/><br/>
-                            <Contact/><br/>
-                            <Contact/><br/>
-                            <Contact/><br/>
-                            <Contact/><br/>
+                            <Contact name = {storage[0].name}/><br/>
                         </CardContent>
                         <Grid container justify={"flex-end"}>
                             {/*<FloatingActionButton/>*/}

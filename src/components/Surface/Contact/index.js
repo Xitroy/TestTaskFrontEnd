@@ -13,13 +13,13 @@ class Contact extends React.Component {
             <div className={"contactItem"}>
                 <Grid container={true} spacing={24} justify={"center"} style={{padding: 24}}>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        NameName
+                        {this.props.name}
                     </Grid>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        Phone
+                        {this.props.name}
                     </Grid>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        Company
+                        {this.props.name}
                     </Grid>
                     <Grid xs={3}>
                         <IconButton><Edit/></IconButton>
