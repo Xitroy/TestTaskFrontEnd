@@ -8,6 +8,11 @@ import Delete from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton/IconButton";
 
 class Contact extends React.Component {
+
+    handleDelete = () => {
+        localStorage.getItem()
+    };
+
     render() {
         return (
             <div className={"contactItem"}>
@@ -16,14 +21,14 @@ class Contact extends React.Component {
                         {this.props.name}
                     </Grid>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        {this.props.name}
+                        {this.props.phone}
                     </Grid>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        {this.props.name}
+                        {this.props.company}
                     </Grid>
                     <Grid xs={3}>
-                        <IconButton><Edit/></IconButton>
-                        <IconButton><Delete/></IconButton>
+                        <IconButton id={"editBtn"+this.props.identifier} ><Edit/></IconButton>
+                        <IconButton id={"trashBtn"+this.props.identifier}><Delete/></IconButton>
                     </Grid>
                 </Grid>
                 <Dialog/>

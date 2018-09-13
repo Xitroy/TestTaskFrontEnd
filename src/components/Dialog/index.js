@@ -11,8 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import ContactForm from "../ContactForm";
 // import FloatButton from "../Dialog/FloatButton";
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
-
 class SimpleDialog extends React.Component {
     handleClose = () => {
         this.props.onClose(this.props.selectedValue);
@@ -23,6 +21,7 @@ class SimpleDialog extends React.Component {
     };
 
     handleSubmit() {
+        //TODO delete it
         //get inputs
         //get storage which actually is an array of objects
         //parse storage
@@ -41,13 +40,15 @@ class SimpleDialog extends React.Component {
         if (storage){
             storage.push(person);
             localStorage.setItem("Storage", JSON.stringify(storage));
-            this.props.onClose(JSON.stringify(localStorage));
+            this.props.onClose("saved");
         }
         else {
             localStorage.setItem("Storage", JSON.stringify([person]));
-            this.props.onClose(JSON.stringify(localStorage));
+            this.props.onClose("saved");
         }
+        document.location.reload(true);
 
+        //TODO delete
         // var ran = Math.random(2);
         // localStorage.setItem(ran.toString(), JSON.stringify(person));
         // var put = JSON.parse(localStorage.getItem("data"));
@@ -105,7 +106,7 @@ const SimpleDialogWrapped = withStyles(styles)(SimpleDialog);
 class SimpleDialogDemo extends React.Component {
     state = {
         open: false,
-        selectedValue: emails[1],
+        selectedValue: "Hello!",
     };
 
     handleClickOpen = () => {
@@ -121,7 +122,7 @@ class SimpleDialogDemo extends React.Component {
     render() {
         return (
             <div>
-                <Typography variant="subheading">Selected: {this.state.selectedValue}</Typography>
+                <Typography variant="subheading">{this.state.selectedValue}</Typography>
                 <br/>
                 <Button onClick={this.handleClickOpen} variant="fab" color={"primary"} className={"fb"}>
                     <AddIcon/>
