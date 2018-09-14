@@ -9,7 +9,6 @@ import Dialog from '@material-ui/core/Dialog';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import ContactForm from "../ContactForm";
-// import FloatButton from "../Dialog/FloatButton";
 
 class SimpleDialog extends React.Component {
     handleClose = () => {
@@ -21,22 +20,26 @@ class SimpleDialog extends React.Component {
     };
 
     handleSubmit() {
-        //TODO delete it
-        //get inputs
-        //get storage which actually is an array of objects
-        //parse storage
-        //put one more
-        //sringify it
+        let storage = JSON.parse(localStorage.getItem("Storage")); //should be an array
+
+        let identifier;
+        if(storage.length>0){
+            identifier = storage.slice(-1).pop().identifier+1;
+        }
+        else {
+            identifier = 0;
+        }
+
         var name = document.getElementById("nameinput").value;
         var phone = document.getElementById("phoneinput").value;
         var company = document.getElementById("companyinput").value;
         var person = {
+            "identifier": identifier,
             "name": name,
             "phone": phone,
             "company": company
         };
 
-        let storage = JSON.parse(localStorage.getItem("Storage")); //should be an array
         if (storage){
             storage.push(person);
             localStorage.setItem("Storage", JSON.stringify(storage));
@@ -47,16 +50,6 @@ class SimpleDialog extends React.Component {
             this.props.onClose("saved");
         }
         document.location.reload(true);
-
-        //TODO delete
-        // var ran = Math.random(2);
-        // localStorage.setItem(ran.toString(), JSON.stringify(person));
-        // var put = JSON.parse(localStorage.getItem("data"));
-        //this.props.onClose(localStorage.getItem("data"));
-        // console.log(localStorage.length);
-        // this.props.onClose(put.name);
-
-
     }
 
     handleCancel() {
@@ -68,7 +61,7 @@ class SimpleDialog extends React.Component {
 
         return (
             <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
-                <DialogTitle id="simple-dialog-title">New contact</DialogTitle>
+                <DialogTitle id="simple-dialog-title"><span className={"dtittle"}>New contact</span></DialogTitle>
                 <div>
                     <ContactForm/>
                 </div>
@@ -103,7 +96,7 @@ SimpleDialog.propTypes = {
 
 const SimpleDialogWrapped = withStyles(styles)(SimpleDialog);
 
-class SimpleDialogDemo extends React.Component {
+class AddDialog extends React.Component {
     state = {
         open: false,
         selectedValue: "Hello!",
@@ -137,4 +130,4 @@ class SimpleDialogDemo extends React.Component {
     }
 }
 
-export default SimpleDialogDemo;
+export default AddDialog;

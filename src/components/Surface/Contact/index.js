@@ -8,11 +8,6 @@ import Delete from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton/IconButton";
 
 class Contact extends React.Component {
-
-    handleDelete = () => {
-        localStorage.getItem()
-    };
-
     render() {
         return (
             <div className={"contactItem"}>
@@ -27,14 +22,34 @@ class Contact extends React.Component {
                         {this.props.company}
                     </Grid>
                     <Grid xs={3}>
-                        <IconButton id={"editBtn"+this.props.identifier} ><Edit/></IconButton>
-                        <IconButton id={"trashBtn"+this.props.identifier}><Delete/></IconButton>
+                        <IconButton id={"editBtn"+this.props.identifier} onClick={() => this.contactEdit(this.props.identifier)}><Edit/></IconButton>
+                        <IconButton id={"trashBtn"+this.props.identifier} onClick={() => this.contactDelete(this.props.identifier)}><Delete/></IconButton>
                     </Grid>
                 </Grid>
                 <Dialog/>
             </div>
 
         );
+    }
+
+    contactDelete(identifier) {
+        let storage = JSON.parse(localStorage.getItem("Storage"));
+        var here;
+        for (let i = 0; i <storage.length; i++) {
+            if (storage[i].identifier == identifier){
+                here = i;
+                break;
+            }
+        }
+        console.log(storage.splice(here,1));
+
+        localStorage.setItem("Storage", JSON.stringify(storage));
+        document.location.reload(true);
+    }
+
+    //Todo
+    contactEdit(identifier) {
+        return undefined;
     }
 }
 
