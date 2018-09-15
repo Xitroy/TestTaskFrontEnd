@@ -29,15 +29,22 @@ class InputWithIcon extends React.Component{
 
         //get relevant
         let storage = JSON.parse(localStorage.getItem("Storage")); // array
-        let relevants=storage.filter(person => {
+        let not_relevants=storage.filter(person => {
             if (person.name.includes(searchString) || person.phone.includes(searchString) || person.company.includes(searchString)){
-                return true
+                return false
             }
-            else {return(false)};
+            else {return(true)};
         });
 
-        localStorage.setItem("Relevants", JSON.stringify(relevants));
+        localStorage.setItem("Not_relevants", JSON.stringify(not_relevants));
 
+        for (let person in storage){
+            document.getElementById("contact_"+storage[person].identifier).style.display = "inherit";
+        }
+
+        for (let person in not_relevants){
+            document.getElementById("contact_"+not_relevants[person].identifier).style.display = "none";
+        }
     }
 }
 

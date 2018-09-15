@@ -14,21 +14,21 @@ function Surface(props) {
     var contactList;
     let storage = JSON.parse(localStorage.getItem("Storage"));
 
-    let relevants;
-    if (JSON.parse(localStorage.getItem("Relevants"))){
-        relevants = JSON.parse(localStorage.getItem("Relevants"));
-    }
-    else {
-        relevants = storage;
-    }
+    // let relevants;
+    // if (JSON.parse(localStorage.getItem("Relevants"))){
+    //     relevants = JSON.parse(localStorage.getItem("Relevants"));
+    // }
+    // else {
+    //     relevants = storage;
+    // }
 
     if (storage==null) {
         localStorage.setItem("Storage", JSON.stringify([]))
         contactList = ""
     }
     else {
-        contactList = relevants.map(function (item) {
-            return <div><Contact name={item.name} phone={item.phone} company={item.company} identifier={item.identifier}/><br/></div>;
+        contactList = storage.map(function (item) {
+            return <div id={"contact_"+item.identifier}><Contact name={item.name} phone={item.phone} company={item.company} identifier={item.identifier}/><br/></div>;
         });
     }
 
