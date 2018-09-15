@@ -6,26 +6,39 @@ import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
 import styles from './style.css';
 
-function InputWithIcon(props) {
-
-    return (
-        <div className={"searchString"}>
-            <div>
-                <Grid container spacing={8} alignItems="flex-end">
-                    <Grid item>
-                        <Search/>
+class InputWithIcon extends React.Component{
+    render(){
+        return (
+            <div className={"searchString"}>
+                <div>
+                    <Grid container spacing={8} alignItems="flex-end">
+                        <Grid item>
+                            <Search/>
+                        </Grid>
+                        <Grid item>
+                            <TextField label="Search" id="search" onChange={() => this.handleSearch()} />
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <TextField label="Search" />
-                    </Grid>
-                </Grid>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+
+    handleSearch() {
+        let searchString = document.getElementById("search").value;
+
+        //get relevant
+        let storage = JSON.parse(localStorage.getItem("Storage")); // array
+        let relevants=storage.filter(person => {
+            if (person.name.includes(searchString) || person.phone.includes(searchString) || person.company.includes(searchString)){
+                return true
+            }
+            else {return(false)};
+        });
+
+        localStorage.setItem("Relevants", JSON.stringify(relevants));
+
+    }
 }
 
-InputWithIcon.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(InputWithIcon);
+export default InputWithIcon;

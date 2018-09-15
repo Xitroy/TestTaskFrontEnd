@@ -14,12 +14,20 @@ function Surface(props) {
     var contactList;
     let storage = JSON.parse(localStorage.getItem("Storage"));
 
+    let relevants;
+    if (JSON.parse(localStorage.getItem("Relevants"))){
+        relevants = JSON.parse(localStorage.getItem("Relevants"));
+    }
+    else {
+        relevants = storage;
+    }
+
     if (storage==null) {
         localStorage.setItem("Storage", JSON.stringify([]))
         contactList = ""
     }
     else {
-        contactList = storage.map(function (item) {
+        contactList = relevants.map(function (item) {
             return <div><Contact name={item.name} phone={item.phone} company={item.company} identifier={item.identifier}/><br/></div>;
         });
     }
