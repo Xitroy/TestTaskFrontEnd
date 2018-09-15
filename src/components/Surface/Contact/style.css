@@ -2,3 +2,9 @@
     word-wrap: break-word;
 }
 
+span[contenteditable="true"]{
+    border-bottom: 2px solid gray;
+    outline: none;
+    padding: 0.5rem;
+    transition: 0.25s;
+}

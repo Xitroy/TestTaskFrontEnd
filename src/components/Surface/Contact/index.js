@@ -13,13 +13,13 @@ class Contact extends React.Component {
             <div className={"contactItem"}>
                 <Grid container={true} spacing={24} justify={"center"} style={{padding: 24}}>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        {this.props.name}
+                        <span className={"editable_"+this.props.identifier}>{this.props.name}</span>
                     </Grid>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        {this.props.phone}
+                        <span className={"editable_"+this.props.identifier}>{this.props.phone}</span>
                     </Grid>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        {this.props.company}
+                        <span className={"editable_"+this.props.identifier}>{this.props.company}</span>
                     </Grid>
                     <Grid xs={3}>
                         <IconButton id={"editBtn"+this.props.identifier} onClick={() => this.contactEdit(this.props.identifier)}><Edit/></IconButton>
@@ -49,7 +49,17 @@ class Contact extends React.Component {
 
     //Todo
     contactEdit(identifier) {
-        return undefined;
+
+        let editables = document.getElementsByClassName("editable_"+identifier);
+        [].forEach.call(editables, (element)=>{
+            if(element.getAttribute("contenteditable") === "true"){
+                element.setAttribute("contenteditable", false);
+            }
+            else {
+                console.log("fuck fuck fuck");
+                element.setAttribute("contenteditable", true);
+            }
+        });
     }
 }
 
