@@ -8,18 +8,20 @@ import Delete from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton/IconButton";
 
 class Contact extends React.Component {
+    isEditable = false;
+
     render() {
         return (
             <div className={"contactItem"}>
                 <Grid container={true} spacing={24} justify={"center"} style={{padding: 24}}>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        <span className={"editable_"+this.props.identifier}>{this.props.name}</span>
+                        <span className={"editable_"+this.props.identifier} id={"contactName"+this.props.identifier}>{this.props.name}</span>
                     </Grid>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        <span className={"editable_"+this.props.identifier}>{this.props.phone}</span>
+                        <span className={"editable_"+this.props.identifier} id={"contactPhone"+this.props.identifier}>{this.props.phone}</span>
                     </Grid>
                     <Grid xs={3} style={{alignSelf:"center"}}>
-                        <span className={"editable_"+this.props.identifier}>{this.props.company}</span>
+                        <span className={"editable_"+this.props.identifier} id={"contactCompany"+this.props.identifier}>{this.props.company}</span>
                     </Grid>
                     <Grid xs={3}>
                         <IconButton id={"editBtn"+this.props.identifier} onClick={() => this.contactEdit(this.props.identifier)}><Edit/></IconButton>
@@ -34,14 +36,8 @@ class Contact extends React.Component {
 
     contactDelete(identifier) {
         let storage = JSON.parse(localStorage.getItem("Storage"));
-        var here;
-        for (let i = 0; i <storage.length; i++) {
-            if (storage[i].identifier == identifier){
-                here = i;
-                break;
-            }
-        }
-        console.log(storage.splice(here,1));
+        let here = storage.findIndex(p => p.identifier === identifier);
+        storage.splice(here,1);
 
         localStorage.setItem("Storage", JSON.stringify(storage));
         document.location.reload(true);
@@ -49,17 +45,41 @@ class Contact extends React.Component {
 
     //Todo
     contactEdit(identifier) {
-
+        this.isEditable = !this.isEditable;
         let editables = document.getElementsByClassName("editable_"+identifier);
         [].forEach.call(editables, (element)=>{
-            if(element.getAttribute("contenteditable") === "true"){
-                element.setAttribute("contenteditable", false);
-            }
-            else {
-                console.log("fuck fuck fuck");
+            if(this.isEditable){
                 element.setAttribute("contenteditable", true);
             }
+            else {
+                element.setAttribute("contenteditable", false);
+            }
         });
+
+        if (this.isEditable){
+            document.getElementById("editBtn"+identifier).style.color="#E91E63";
+            // document.getElementById("editBtn"+identifier).setAttribute("color", "secondary");
+        }
+        else {
+            document.getElementById("editBtn"+identifier).style.color="#616161";
+
+            var name = document.getElementById("contactName"+identifier).innerText;
+            var phone = document.getElementById("contactPhone"+identifier).innerText;
+            var company = document.getElementById("contactCompany"+identifier).innerText;
+            var person = {
+                "identifier": identifier,
+                "name": name,
+                "phone": phone,
+                "company": company
+            };
+
+            let storage = JSON.parse(localStorage.getItem("Storage"));
+            let personToChange = storage.findIndex(p => p.identifier === identifier);
+            storage[personToChange] = person;
+            localStorage.setItem("Storage", JSON.stringify(storage));
+            document.location.reload(true);
+        }
+
     }
 }
 
