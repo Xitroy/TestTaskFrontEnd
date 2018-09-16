@@ -77,7 +77,6 @@ class Contact extends React.Component {
             let personToChange = storage.findIndex(p => p.identifier === identifier);
             storage[personToChange] = person;
             localStorage.setItem("Storage", JSON.stringify(storage));
-            document.location.reload(true);
         }
 
     }
