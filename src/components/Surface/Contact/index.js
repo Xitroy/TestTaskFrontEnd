@@ -63,10 +63,10 @@ class Contact extends React.Component {
         else {
             document.getElementById("editBtn"+identifier).style.color="#616161";
 
-            var name = document.getElementById("contactName"+identifier).innerText;
-            var phone = document.getElementById("contactPhone"+identifier).innerText;
-            var company = document.getElementById("contactCompany"+identifier).innerText;
-            var person = {
+            let name = document.getElementById("contactName"+identifier).innerText;
+            let phone = document.getElementById("contactPhone"+identifier).innerText;
+            let company = document.getElementById("contactCompany"+identifier).innerText;
+            let person = {
                 "identifier": identifier,
                 "name": name,
                 "phone": phone,

@@ -1,0 +1,14 @@
+1. Be careful with var, let and const
+2. Remove all unusable strings
+3. In order to document blocks use this guide: https://react-styleguidist.js.org/docs/documenting.html
+at least description of component and properties
+in description put some relevant explanation of logic
+4. DRY - don't repeat yourself
+5. Check if property exists
+6. Think about testability
+7. Boolean variables should start with "is", "has" or "should"
+8. Let's make a convention that "somethig_id" will be with '_', not "somethingId"
+9. Each component should export with "export default withStyles(styles) (ClassName)"
+10. Use only classes inside components, no functions
+11. Delete all unnecessary console.logs or at least comment them
+12. All onClick and onChange methods should start with "handle"

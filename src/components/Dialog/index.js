@@ -30,10 +30,10 @@ class SimpleDialog extends React.Component {
             identifier = 0;
         }
 
-        var name = document.getElementById("nameinput").value;
-        var phone = document.getElementById("phoneinput").value;
-        var company = document.getElementById("companyinput").value;
-        var person = {
+        let name = document.getElementById("nameinput").value;
+        let phone = document.getElementById("phoneinput").value;
+        let company = document.getElementById("companyinput").value;
+        let person = {
             "identifier": identifier,
             "name": name,
             "phone": phone,
@@ -130,4 +130,4 @@ class AddDialog extends React.Component {
     }
 }
 
-export default AddDialog;
+export default withStyles(styles) (AddDialog);
