@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
 import styles from './style.css';
 
-class InputWithIcon extends React.Component{
+class SearchPanel extends React.Component{
     render(){
         return (
             <div className={"searchString"}>
@@ -50,4 +49,4 @@ class InputWithIcon extends React.Component{
     }
 }
 
-export default InputWithIcon;
+export default withStyles(styles)(SearchPanel);

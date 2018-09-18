@@ -6,6 +6,7 @@ import Dialog from '@material-ui/core/Dialog';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton/IconButton";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 class Contact extends React.Component {
     isEditable = false;
@@ -82,4 +83,4 @@ class Contact extends React.Component {
     }
 }
 
-export default Contact;
+export default withStyles(styles)(Contact);

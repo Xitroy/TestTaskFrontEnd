@@ -6,7 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from "@material-ui/core/Grid/Grid";
 import Contact from "./Contact";
-import InputWithIcon from "./Search";
+import SearchPanel from "./SearchPanel";
 
 
 function Surface(props) {
@@ -37,7 +37,7 @@ function Surface(props) {
             <Grid container justify={"center"}>
                 <Grid item xs={8}>
                     <Card className={classes.card}>
-                        <InputWithIcon/>
+                        <SearchPanel/>
                         <CardContent>
                             {contactList}
                         </CardContent>
