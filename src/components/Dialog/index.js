@@ -99,7 +99,7 @@ const SimpleDialogWrapped = withStyles(styles)(SimpleDialog);
 class AddDialog extends React.Component {
     state = {
         open: false,
-        selectedValue: "Hello!",
+        selectedValue: "",
     };
 
     handleClickOpen = () => {
